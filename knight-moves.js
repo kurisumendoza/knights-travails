@@ -37,10 +37,10 @@ class Chessboard {
     console.log(validMoves);
     return validMoves;
   }
+
+  knightMoves(start, end) {}
 }
 
 const chessboard = new Chessboard();
 
 console.log(chessboard.board);
-
-const knightMoves = (start, end) => {};
