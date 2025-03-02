@@ -2,7 +2,6 @@ class Chessboard {
   constructor() {
     this.board = new Map();
     this.#initBoard();
-    this.#generateMoves('2,2');
   }
 
   #initBoard() {
@@ -34,8 +33,26 @@ class Chessboard {
       validMoves.push([nextX, nextY]);
     });
 
-    console.log(validMoves);
     return validMoves;
+  }
+
+  #findShortestPath(start, end) {
+    const movesQueue = [[start]];
+    const visitedPos = new Set();
+
+    while (movesQueue.length) {
+      const currentPath = movesQueue.shift();
+      const currentPos = String(currentPath[currentPath.length - 1]);
+
+      if (currentPos === String(end)) return currentPath;
+
+      this.#generateMoves(currentPos).forEach((move) => {
+        if (!visitedPos.has(String(move))) {
+          movesQueue.push(currentPath.concat([move]));
+          visitedPos.add(String(move));
+        }
+      });
+    }
   }
 
   knightMoves(start, end) {}
@@ -43,4 +60,4 @@ class Chessboard {
 
 const chessboard = new Chessboard();
 
-console.log(chessboard.board);
+chessboard.knightMoves([0, 0], [6, 6]);
