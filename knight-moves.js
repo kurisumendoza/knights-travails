@@ -55,9 +55,15 @@ class Chessboard {
     }
   }
 
-  knightMoves(start, end) {}
+  knightMoves(start, end) {
+    const moves = this.#findShortestPath(start, end);
+
+    return `You made it in ${
+      moves.length - 1
+    } moves! Here's your path: \n${moves.map((pos) => `[${pos}]`).join('\n')}`;
+  }
 }
 
 const chessboard = new Chessboard();
 
-chessboard.knightMoves([0, 0], [6, 6]);
+console.log(chessboard.knightMoves([3, 3], [4, 3]));
